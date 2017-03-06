@@ -45,11 +45,18 @@ function cookieget(n) {
 
 
 
-// 图片轮播部分
+
 window.onload = function() {
-    var banner = document.getElementById('banner');
-    var lis = document.getElementById('img').getElementsByTagName('li');
-    var order = document.getElementById('order');
+
+  // 图片轮播部分
+
+
+    var $ = function(id){
+      return document.getElementById(id);
+    };
+    var banner = $('banner');
+    var lis = $('img').getElementsByTagName('li');
+    var order = $('order');
     closeclick;
     //根据上面图片的数量创建相应个数的焦点
     for (i = 0; i < lis.length; i++) {
@@ -103,6 +110,28 @@ window.onload = function() {
             play(this.index);
         }
     }
+
+
+    // TAB选项卡
+
+
+    var tabs = $('tabs').getElementsByTagName('li');
+    var ul = $('list').getElementsByTagName('ul');
+    for (var i = 0; i < tabs.length; i++) {
+      tabs[i].index = i;
+      tabs[i].onmouseover = function(){
+        for (var i = 0; i < tabs.length; i++) {
+          tabs[i].className = ul[i].className = '';
+        }
+        this.className = ul[this.index].className = 'active';
+      }
+    }
+
+
+
 }
+
+
+
 
 
