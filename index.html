@@ -61,9 +61,9 @@
 	<!-- 轮播图 -->
 	<div id="banner" class="banner">
 		<ul class="img" id="img">
-			<li class="on"><img src="./images/banner1.jpg" alt="1"></li>
-			<li><img src="./images/banner2.jpg" alt="2"></li>
-			<li><img src="./images/banner3.jpg" alt="3"></li>
+			<li class="on"><a href="http://open.163.com/" target="_blank"><img src="./images/banner1.jpg" alt="1"></a></li>
+			<li><a href="http://study.163.com/" target="_blank"><img src="./images/banner2.jpg" alt="2"></a></li>
+			<li><a href="http://icourse163.org" target="_blank"><img src="./images/banner3.jpg" alt="3"></a></li>
 		</ul>
 		<ul class="order" id="order">
 		    <!-- <li class="on">1</li>
@@ -80,7 +80,7 @@
 			<div class="doc">
 				<h2>网易公开课</h2>
 				<p>推出国内外名校公开课，涉及广泛的学科，名校老师认真讲解深度剖析，网易视频公开课频道搭建起强有力的网络视频教学平台。</p>
-				<a href="#1"><span>了解更多></span></a>
+				<a href="http://open.163.com/" target="_blank">了解更多></a>
 			</div>
 		</div>
 		<div class="cloud">
@@ -88,7 +88,7 @@
 			<div class="doc">
 				<h2>云课堂</h2>
 				<p>网易旗下大型在线学习平台，该平台面向学习者提供海量免费,优质课程,创新的个性化学习体验，自由开放的交流互动环境。</p>
-				<a href="#1"><span>了解更多></span></a>
+				<a href="http://study.163.com/" target="_blank">了解更多></a>
 			</div>
 		</div>
 		<div class="mooc">
@@ -96,7 +96,7 @@
 			<div class="doc">
 				<h2>中国大学MOOC</h2>
 				<p>是爱课程网携手云课堂打造的在线学习平台,每一个有提升愿望的人,都可以在这里学习中国最好的大学课程，学完还能获得认证证书。</p>
-				<a href="#1"><span>了解更多></span></a>
+				<a href="http://www.icourse163.org/" target="_blank">了解更多></a>
 			</div>
 		</div>
 	</div>
@@ -120,49 +120,72 @@
 					<li>编程语言</li>
 				</ul>
 			<div class="cont" id="list">
-				<ul class="active">
-					<li>
-						<a href="#"><img class="img" src="./images/cont/cont-1-1.png" alt=""></a>
-						<h2 class="title">混音全揭秘 舞曲实战篇 揭秘音乐界面揭秘音乐界面</h2>
-						<h3 class="author">音频帮</h3>
-						<p class="follow"><i class="person"></i><span>510</span></p>
-						<p class="money">￥800.00</p>
-					</li>
-					<li>
-						<a href="#"><img class="img" src="./images/cont/cont-1-2.png" alt=""></a>
-						<h2 class="title">混音全揭秘 舞曲实战篇 揭秘音乐界面揭秘音乐界面</h2>
-						<h3 class="author">音频帮</h3>
-						<p class="follow"><i class="person"></i><span>510</span></p>
-						<p class="money">￥800.00</p>
-					</li>
-				</ul>
+					<div class="courses">
+							<div class="img" >
+								<img  src="./images/cont/cont-1-1.png" alt="">
+							</div>
+							<div class="c-info" >
+								<p class="title">混音全揭秘 舞曲实战篇 揭秘音乐界面揭秘音乐界面</p>
+								<p class="author">音频帮</p>
+								<p class="follow"><i class="person"></i><span>510</span></p>
+								<p class="money">￥800.00</p>
+							</div>
+						<div class="c-detail clearfix" style="display: none;">
+							<img class="img" src="./images/cont/cont-1-1.png" alt="">
+							<div class="c-det clearfix">
+								<p class="title">混音全揭秘 舞曲实战篇 揭秘音乐界面
+								</p>
+									<div class="c-count">
+										<i class="c-icon"></i>"3rf"
+										<p class="c-provider">发布</p>
+										<p class="c-category">分类</p>
+									</div>
+							</div>
+							<div class="c-desc clearfix">
+								<p>
+									主要讲解木椅的建模
+								</p>
+							</div>
+						</div>
+				</div>
 			</div>
 			<!-- 翻页 -->
-			<div class="page ">
-				<dl>
-					<dt><a href="#"><i class="before-page"></i></a></dt>
-					<dd><a href="#">1</a></dd>
-					<dd><a href="#">2</a></dd>
-					<dd><a href="#">3</a></dd>
-					<dd><a href="#">4</a></dd>
-					<dd><a href="#">5</a></dd>
-					<dd><a href="#">6</a></dd>
-					<dd><a href="#">7</a></dd>
-					<dd><a href="#">8</a></dd>
-					<a href="#"><i class="next-page"></i></a>
-				</dl>
+			<div class="page">
+					<i class="before-page"></i>
+					<a href="#"><span class="page-on">1</span></a>
+					<a href="#"><span>2</span></a>
+					<a href="#"><span>3</span></a>
+					<a href="#"><span>4</span></a>
+					<a href="#"><span>5</span></a>
+					<a href="#"><span>6</span></a>
+					<a href="#"><span>7</span></a>
+					<a href="#"><span>8</span></a>
+					<i class="next-page"></i>
 			</div>
 		</div>
 
 		<!-- 侧边栏 -->
 		<div class="side">
-			<div class="title"><h2>机构介绍</h2></div>
 			<div class="video">
-				<h2>观看下面的视频来了解吧：</h2>
-				<div class="mp4"></div>
+				<h2>机构介绍</h2>
+				<div class="v-info">
+						<p>观看下面的视频来了解吧：</p>
+						<img src="./images/videoHolder.jpg"  />
+				</div>
+				<div class="v-mask" style="display: none;">
+					<div class="v-video">
+						<p>请看下面的视频</p>
+						<i class="close"></i>
+						<div class="control">
+							<video id="myvideo" controls="controls" width="888px">视频无法播放，请使用现代浏览器！</video>
+								<i class="pause"></i>
+							</video>
+						</div>
+					</div>
+				</div>
 			</div>
-			<div class="doc">
-				<span>最热排行</span>
+			<div class="pop">
+				<h3 class="title">最热排行</h3>
 				<ul>
 					<li>
 						<a href="">
@@ -195,9 +218,9 @@
 			<div class="link fl">
 				<span>友情链接:</span>
 				<ul>
-					<li><a href="">网易公开课</a></li>
-					<li><a href="">网易公开课</a></li>
-					<li><a href="">更多</a></li>
+					<li><a href="http://open.163.com/" target="_blank">网易公开课</a></li>
+					<li><a href="http://study.163.com/" target="_blank">网易云课堂</a></li>
+					<li><a href="http://www.icourse163.org/" target="_blank">中国大学MOOC</a></li>
 				</ul>
 			</div>
 			<div class="us fl">
@@ -219,7 +242,7 @@
 	</div>
 
 
-<script type="text/javascript" src="./js/onload.js"></script>
+<script type="text/javascript" src="./js/onload.jss"></script>
 
 
 </body>

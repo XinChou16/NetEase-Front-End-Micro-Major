@@ -45,20 +45,3 @@ height:0;
 .fl-clear {
 zoom:1; /* for IE6 IE7 */
 }
-
-/* 隐藏, 通常用来与 JS 配合 */
-body .fl-hide {
-display:none;
-}
-
-/* 设置内联, 减少浮动带来的bug */
-.fl-left,.fl-right {
-display:inline;
-}
-.fl-left {
-float:left;
-}
-.fl-right {
-float:right;
-}
-
