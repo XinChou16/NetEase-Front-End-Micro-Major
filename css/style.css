@@ -374,7 +374,7 @@ li{
 }
 #intro .mooc{
 	float: left;
-	width: 340px;
+	width: 320px;
 	height: 100%;
 }
 #intro .mooc img{
@@ -419,7 +419,7 @@ li{
 }
 #show img{
 	float: left;
-	margin-right:4px;
+	/*margin-right:4px;*/
 }
 /* 去掉最后一张图片的右边距 */
 #show .no-mar{
@@ -486,7 +486,7 @@ li{
 	width: 225px;
 	height: 228px;
 	box-shadow: 0 1px 1px #d4d3d3;
-	margin: 0 20px 20px 0;
+	margin: 0 17px 20px 0;
 	background: #fff;
 }
 #content .cont-left .cont ul{
@@ -619,6 +619,7 @@ li{
 	/*border: 1px solid cyan;*/
 	float: right;
 	margin: 10px 19px 120px 0;
+	text-align: right; // 使翻页按钮始终位于右下角
 }
 #content .cont-left .page span{
 	display: inline-block;
@@ -936,4 +937,24 @@ li{
 }
 #footer .more-cont{
 	color: #bebfc0;
+}
+@media screen and (max-width: 1205px){
+	.inform .inform-cont, .naviator, #intro, #banner{
+		width:960px;
+	}
+	#intro .c-intro{
+		width: 271px;
+	}
+	#intro> .c-intro+.c-intro{
+		/*margin-left: 73.5px;*/
+	}
+	#intro{
+		width:1296px;
+	}
+	#content .cont-left,#content .cont,#content .page{
+		width: 735px;
+	}
+	#content .cont-left .cont .courses{
+		margin-right: 19px;
+	}
 }
