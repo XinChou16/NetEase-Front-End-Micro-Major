@@ -1,3 +1,9 @@
+
+// 获取DOM节点函数
+var $ = function(id){
+  return document.getElementById(id);
+};
+
 // 关闭顶部提示条
 function cookiesave(n, v, mins, dn, path) {
     if (n) {
@@ -31,33 +37,32 @@ function cookieget(n) {
   }
 // 点击关闭函数
   function closeclick() {
-      document.getElementById('note').style.display = 'none';
+      $('note').style.display = 'none';
       cookiesave('closeclick', 'closeclick', '', '', '');
   }
 // 点击a标签时,使提示条隐藏起来,即实现消失的效果.
   function clickclose() {
       if (cookieget('closeclick') == 'closeclick') {
-          document.getElementById('note').style.display = 'none';
+          $('note').style.display = 'none';
       } else {
-          document.getElementById('note').style.display = 'block';
+          $('note').style.display = 'block';
       }
   }
 
+// ajax 'get'方法
+function get() {
 
-
+}
 
 window.onload = function() {
 
   // 图片轮播部分
 
-
-    var $ = function(id){
-      return document.getElementById(id);
-    };
     var banner = $('banner');
     var lis = $('img').getElementsByTagName('li');
     var order = $('order');
     closeclick;
+
     //根据上面图片的数量创建相应个数的焦点
     for (i = 0; i < lis.length; i++) {
         var newLi = document.createElement('li');
@@ -67,7 +72,7 @@ window.onload = function() {
     var orderLis = order.getElementsByTagName('li');
     orderLis[0].className = 'on';
 
-    //前期准备工作结束，开始正式的主要部分，让它动起来
+    //设置轮播运动函数
     var num = 0;
     var xh = null;
 
@@ -113,8 +118,6 @@ window.onload = function() {
 
 
     // TAB选项卡
-
-
     var tabs = $('tabs').getElementsByTagName('li');
     var ul = $('list').getElementsByTagName('ul');
     for (var i = 0; i < tabs.length; i++) {
@@ -130,8 +133,3 @@ window.onload = function() {
 
 
 }
-
-
-
-
-
