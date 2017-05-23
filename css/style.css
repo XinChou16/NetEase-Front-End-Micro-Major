@@ -480,6 +480,10 @@ li{
 	padding-top: 28px;
 	background-color: #f8f8f8;
 }
+#content .cont-left .cont img{
+	width: 225px;
+	height: 124px;
+}
 #content .cont-left .cont .courses{
 	display: inline-block;
 	position: relative;
