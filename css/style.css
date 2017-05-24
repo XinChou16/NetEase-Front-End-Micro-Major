@@ -781,13 +781,18 @@ li{
 	margin: 20px auto;
 }
 #content .side .pop ul li img{
+	display: block;
 	float: left;
+	width: 47px;
+	height: 50px;
 	margin-left: 0;
-	margin-right: 8px;
+	margin-right: 7px;
 }
 #content .side .pop ul li p{
 	color: #7a7a7a;
 	margin-top: -2px;
+	/*text-wrap: wrap;*/
+	width: 130px;
 }
 #content .side .pop li .title{
 	display: inline-block;

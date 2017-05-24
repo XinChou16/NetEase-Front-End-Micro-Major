@@ -1,12 +1,14 @@
 window.onload = function(){
   
-    getCourseList();
+    // getCourseList();
+    login();
 };
 
 
 function $(id){
     return document.getElementById(id);
 }
+
 // 获取课程
 function getCourseList() {
     var data = {
@@ -14,15 +16,20 @@ function getCourseList() {
         psize:20,
         type:10
     };
-    var url = 'http://study.163.com/webDev/couresByCategory.htm';
-    get(url,data,renderCourses);
+    var url1 = 'http://study.163.com/webDev/couresByCategory.htm';
+    var url2 = 'http://study.163.com/webDev/hotcouresByCategory.htm';
+
+    // get(url1,data,renderCoursesList);
+    get(url2,null,renderCoursesHot);
     si2detail();
 }
 
 // AJAX get 方法
 function get(url,data,callback) {
 
-// 将请求参数从对象转换为&字符连接的字符串
+  // 将请求参数从对象转换为&字符连接的字符串
+  var data = data || {};
+  if(data.length ===0) return false;
   var urlLast = '';
   for(var key in data){
     urlLast += '&' + key + '=' + data[key];
@@ -38,7 +45,7 @@ function get(url,data,callback) {
   xhr.onreadystatechange = function () {
     if(xhr.readyState === XMLHttpRequest.DONE) {
       if(xhr.status === 200) {
-        console.log('获取课程课表数据成功');
+        console.log('获取数据成功');
         var resTxt = JSON.parse(xhr.responseText);
         callback(resTxt);
       }else{
@@ -52,8 +59,8 @@ function get(url,data,callback) {
   xhr.send(null);
 }
 
-// AJAX get方法传入的回调函数 - 显示课程方法
-function renderCourses(data) {
+// 显示课程列表
+function renderCoursesList(data) {
     console.log(data.totalCount);
     var cHTML = '';
     if (data.list[0].price === 0) {
@@ -75,8 +82,11 @@ function renderCourses(data) {
     cHTML += data.list[0].provider + '</p><p class="c-category">';
     cHTML += data.list[0].categoryName  + '</p></div></div><div class="c-desc clearfix"><p>';
     cHTML += data.list[0].description  + '</p></div></div>';
+
     $('list').innerHTML = cHTML;
 }
+
+// 鼠标悬浮显示课程详细信息
 function si2detail() {
     var simple = $('list').getElementsByTagName('div');
     simple[1].style.borderRightColor = 'red';
@@ -84,5 +94,32 @@ function si2detail() {
     var detail = 1;
 };
 
+// 显示右侧课程列表
+function renderCoursesHot(data){
+    var popHTML = '';
 
+    // HTML代码拼接
+    popHTML += '<li><a href="#"><img src="';
+    popHTML += data[0].smallPhotoUrl + '" alt="';
+    popHTML += data[0].name + '"><p>';
+    popHTML += data[0].name + '</p><p class="follow"><i class="person"></i><span>';
+    popHTML += data[0].learnerCount + '</span></p></a></li>';
+
+    $('pop-list').innerHTML = popHTML;
+}
+
+// 登录请求判断
+function login(){
+    var loginData = {
+        userName: 'studyOnline' ,
+        password: 'study.163.com'
+    };
+    var url = 'http://study.163.com/webDev/login.htm';
+    get(url,loginData,loginDo);
+}
+
+// 登录返回数据参数
+function loginDo(data){
+    console.log(data);
+}
 
