@@ -121,5 +121,6 @@ function login(){
 // 登录返回数据参数
 function loginDo(data){
     console.log(data);
+    console.log(1);
 }
 
