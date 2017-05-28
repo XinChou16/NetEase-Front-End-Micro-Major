@@ -2,6 +2,7 @@ window.onload = function(){
   
     // getCourseList();
     login();
+    informBar();
 };
 
 
@@ -9,7 +10,17 @@ function $(id){
     return document.getElementById(id);
 }
 
-// 获取课程
+/** 获取课程数据函数模块
+ * getCourseList()
+ * get(url,data,callback) 
+ * renderCoursesList(data)
+ * si2detail()
+ * renderCoursesHot(data)
+ * login()
+ * loginDo
+ */
+
+// 获取课程方法
 function getCourseList() {
     var data = {
         pageNo:1,
@@ -24,7 +35,7 @@ function getCourseList() {
     si2detail();
 }
 
-// AJAX get 方法
+// AJAX get 方法封装
 function get(url,data,callback) {
 
   // 将请求参数从对象转换为&字符连接的字符串
@@ -59,7 +70,7 @@ function get(url,data,callback) {
   xhr.send(null);
 }
 
-// 显示课程列表
+// 显示课程列表方法
 function renderCoursesList(data) {
     console.log(data.totalCount);
     var cHTML = '';
@@ -86,7 +97,7 @@ function renderCoursesList(data) {
     $('list').innerHTML = cHTML;
 }
 
-// 鼠标悬浮显示课程详细信息
+// 鼠标悬浮显示课程详细信息方法
 function si2detail() {
     var simple = $('list').getElementsByTagName('div');
     simple[1].style.borderRightColor = 'red';
@@ -94,7 +105,7 @@ function si2detail() {
     var detail = 1;
 };
 
-// 显示右侧课程列表
+// 显示右侧课程列表方法
 function renderCoursesHot(data){
     var popHTML = '';
 
@@ -108,7 +119,7 @@ function renderCoursesHot(data){
     $('pop-list').innerHTML = popHTML;
 }
 
-// 登录请求判断
+// 登录请求判断方法
 function login(){
     var loginData = {
         userName: 'studyOnline' ,
@@ -118,9 +129,82 @@ function login(){
     get(url,loginData,loginDo);
 }
 
-// 登录返回数据参数
+// 登录返回数据参数方法
 function loginDo(data){
     console.log(data);
     console.log(1);
 }
 
+
+/**关闭顶部通知条方法
+ * 1: cookie方法封装
+ * 2: 关闭顶部通知条方法 informBar()
+ * 3: 给通知条添加绑定事件 closeInformBar()
+ * 4: 页面加载判断是否设置cookie
+ */
+
+// 1: cookie方法封装
+var cookie = { 
+
+    get: function (name) {
+        var name = encodeURIComponent(name) + '=',
+            cookie = document.cookie,
+            begin = cookie.indexOf(name);
+        
+        // 查找name的起始的索引值
+        if (begin > -1) {
+            var end = cookie.indexOf(';', begin);
+            if (end == -1) end = cookie.length;
+            // 提取出value的值
+            var value = cookie.substring(begin + name.length,end);
+            
+            return decodeURIComponent(value);
+        } else{
+            return '';
+        }
+    },
+
+    set: function (name,value,expires,path) {
+            var name = encodeURIComponent(name);
+            var value = encodeURIComponent(value);
+            // name,value是必须传入的参数
+            var nessInfo = name + '=' + value;
+
+            var now = new Date();
+            // getDate(0)是获取到天数的方法
+            now.setDate(now.getDate() + expires);
+            // 过期时间和路径可有可无，这里用三元操作符进行判断，也可以用if判断
+            var expires = (expires instanceof Number) ? '' : ';expires=' + now.toGMTString();
+
+            var path = path == '' ? '' : ';path=' + path;
+
+            document.cookie = nessInfo + expires + path;
+        },
+
+    unset: function (name,value,expires,path) {
+        this.set(name, '', new Date(0),path);
+    }
+}
+
+// 2: 关闭顶部通知条方法
+function informBar() {
+    closeInformBar();
+    loadShutDown('isShutDown');
+}
+
+// 3: 给通知条添加绑定事件
+function closeInformBar() {
+    $('shutDown').onclick = function(){
+        cookie.set('isShutDown',true,10,'/');
+        console.log(document.cookie);
+        $('inform').style.display = 'none';
+    }
+}
+
+//4: 页面加载判断是否设置cookie
+function loadShutDown(name) {
+    var isSetCookie = cookie.get(name);
+    if (isSetCookie) {
+        $('inform').style.display = 'none';
+    }
+}
