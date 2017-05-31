@@ -45,3 +45,7 @@ height:0;
 .fl-clear {
 zoom:1; /* for IE6 IE7 */
 }
+
+.hidden{
+	display: none;
+}

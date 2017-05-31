@@ -26,7 +26,7 @@
 		<form action="">
 			<p>登录网易云课堂</p>
 			<p><input class="id" type="text"  placeholder="帐号"></p>
-			<p><input class="pw" type="text"  placeholder="密码"></p>
+			<p><input class="pw" type="password"  placeholder="密码"></p>
 			<p><input class="btn" type="button" value="登录" ></p>
 		</form>
 	</div>
@@ -40,10 +40,10 @@
 				<div class="head">
 					<p><i class="edu"></i><span class="net">网易教育产品部</span></p>
 				</div>
-				<div class="before-follow" style="display: none;">
-					<button id="btn"><i class="follow"></i></button><span>粉丝&nbsp;45</span>
+				<div class="before-follow" id="before-follow">
+					<button ><i class="follow"></i></button><span>粉丝&nbsp;45</span>
 				</div>
-				<div class="after-follow" >
+				<div class="after-follow" id="after-follow" style="display: none;">
 					<p><i class="has-follow"></i>已关注&nbsp;|  <a href="">取消</a></p>
 				</div>
 			</div>
@@ -120,9 +120,9 @@
 					<li>编程语言</li>
 				</ul>
 			<div class="cont" id="list">
-				<!--<div class="courses">
-					<div class="c-list" style="display: none;">
-						<div class="img" >
+				<div class="courses">
+					<div class="c-list" id="c-list">
+						<!--<div class="img" >
 							<img  src="./images/cont/cont-1-1.png" alt="">
 						</div>
 						<div class="c-info" >
@@ -130,9 +130,10 @@
 							<p class="author">音频帮</p>
 							<p class="follow"><i class="person"></i><span>510</span></p>
 							<p class="money">￥800.00</p>
-						</div>
+						</div>-->
 					</div>
-					<div class="c-detail clearfix" >
+					<div class="c-detail clearfix" id="c-detail" style="display: none;" >
+						
 						<img class="img" src="./images/cont/cont-1-1.png" alt="">
 						<div class="c-det clearfix">
 							<p class="title">混音全揭秘 舞曲实战篇 揭秘音乐界面
@@ -149,7 +150,8 @@
 							</p>
 						</div>
 					</div>
-				</div>-->
+					
+				</div>
 			</div>
 			<!-- 翻页 -->
 			<div class="page">
@@ -238,6 +240,7 @@
 
 
 <script type="text/javascript" src="./js/onload.js"></script>
+<script type="text/javascript" src="./js/on.js"></script>
 
 
 </body>
