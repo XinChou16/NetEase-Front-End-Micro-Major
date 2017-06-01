@@ -146,13 +146,13 @@ function loginDo(data){
 
 
 /** 获取课程数据函数模块
- * 1.getCourseList()
- * 2.get(url,data,callback) 
- * 3.renderCoursesList(data)
- * 4.si2detail()
- * 5.renderCoursesHot(data)
- * 6.login()
- * 7.loginDo
+ * 1.
+ * 2. 
+ * 3.
+ * 4.
+ * 5.
+ * 6.
+ * 7.
  */
 
 // 1.获取课程方法
@@ -166,6 +166,7 @@ function getCourseList() {
     var url2 = 'http://study.163.com/webDev/hotcouresByCategory.htm';
 
     get(url1,data,renderCoursesList);
+    get(url1,data,renderCoursesListDetail);
     get(url2,null,renderCoursesHot);
     si2detail();
 }
@@ -242,19 +243,53 @@ function si2detail() {
                 $('c-detail').style.display = 'none';
          },false)
          
-};
+}; 
 
-// 5.显示右侧课程列表方法
+// 5.显示课程列表详细内容方法
+function renderCoursesListDetail(data) {
+    var cHTML = '';
+    if (data.list[0].price === 0) {
+        data.list[0].price = '免费';
+    }else{
+        data.list[0].price = '￥' + data.list[0].price;
+    }
+
+    cHTML += '<img class="img"src="';
+    cHTML += data.list[0].middlePhotoUrl + '"><div class="c-det clearfix"><p class="title">' ;
+    cHTML += data.list[0].name + '</p><div class="c-count"><i class="c-icon"></i>"3rf"<p class="c-provider">';
+    cHTML += data.list[0].provider + '</p><p class="c-category">';
+    cHTML += data.list[0].provider + '</p><p class="follow"><i class="person"></i><span>';
+    cHTML += data.list[0].learnerCount + '</p></div></div><div class="c-desc clearfix"><p>';
+    cHTML += data.list[0].description + '</p></div>';
+
+    $('c-detail').innerHTML = cHTML;
+}
+
+
+// 6.显示右侧课程列表方法
 function renderCoursesHot(data){
     var popHTML = '';
 
-    // HTML代码拼接
-    popHTML += '<li><a href="#"><img src="';
-    popHTML += data[0].smallPhotoUrl + '" alt="';
-    popHTML += data[0].name + '"><p>';
-    popHTML += data[0].name + '</p><p class="follow"><i class="person"></i><span>';
-    popHTML += data[0].learnerCount + '</span></p></a></li>';
+    for (var i = 0; i < data.length; i++) {
+        // HTML代码拼接
+        popHTML += '<li><a href="#"><img src="';
+        popHTML += data[i].smallPhotoUrl + '" alt="';
+        popHTML += data[i].name + '"><p>';
+        popHTML += data[i].name + '</p><p class="follow"><i class="person"></i><span>';
+        popHTML += data[i].learnerCount + '</span></p></a></li>';
+    }
 
     $('pop-list').innerHTML = popHTML;
+    $('pop-list').setInterval = popHTML;
+    courseRoll(data);
 }
 
+function courseRoll(data) {
+    var items = $('pop-list').getElementsByTagName('li');
+    setInterval(function() {
+        // for (var i = 0; i < data.length; i++) {
+            items[0].style.display = 'none';
+        // }
+    },1000);
+    console.log(10);
+}

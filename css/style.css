@@ -573,7 +573,6 @@ li{
 #content .cont-left .cont .c-detail img{
 	border: none;
 	float: left;
-	margin: 10px;
 }
 #content .cont-left .cont .c-detail .c-det{
 	display: inline-block;
@@ -774,7 +773,16 @@ li{
 	font-weight: normal;
 	border-bottom: 1px solid #ddd;
 }
+#content .side .pop ul{
+	height: 720px;
+	overflow: hidden;
+	position: relative;
+	top: 0;
+	left: 0;
+	transition: all .5;
+}
 #content .side .pop ul li{
+	/*position: absolute;*/
 	width: 184px;
 	height: 50px;
 	/*border: 1px solid purple;*/
