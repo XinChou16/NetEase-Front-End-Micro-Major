@@ -11,6 +11,9 @@ body{
 li{
 	list-style: none;
 }
+.hidden{
+	display: none;
+}
 .clearfix:after,.clearfix:before{
 			content: ".";
 			display: block;
@@ -463,6 +466,7 @@ li{
 	line-height: 50px;
 	font-family: microsoft yahei;
 	text-align: center;
+	cursor: pointer;
 }
 #content .cont-left .head .active{
 	background-color: #39a030;
@@ -493,6 +497,14 @@ li{
 	margin: 0 17px 20px 0;
 	background: #fff;
 }
+/*#content .cont-left .cont .c-wrap{
+	display: inline-block;
+	width: 225px;
+	height: 228px;
+	margin-right: 17px;
+}*/
+
+
 #content .cont-left .cont ul{
 	display: none;
 }
@@ -722,7 +734,7 @@ li{
 	transform: translate(-50% -50%);
 	height: 678px;
 	margin-left: -478px;
-	margin-top: -339px;
+	margin-top: -292px;
 	background: #fff;
 }
 #content .side .video .v-mask .v-video p{
@@ -766,20 +778,27 @@ li{
 	box-shadow: 0 1px 1px #d4d3d3;
 	margin-top: 10px;
 }
+#content .side .pop .pop-wrap{
+	width: 223px;	
+	height: 775px;
+	position: relative;
+	overflow: hidden;
+}
+#content .side .pop-list{
+	width: 223px;	
+	height: 720px;
+	position: absolute;
+	top: 0px;
+	-webkit-transition: .5s;
+	-o-transition: .5s;
+	transition: .5s;
+}
 #content .side .pop h3{
 	font-size: 16px;
 	line-height: 55px;
 	padding-left: 20px;
 	font-weight: normal;
 	border-bottom: 1px solid #ddd;
-}
-#content .side .pop ul{
-	height: 720px;
-	overflow: hidden;
-	position: relative;
-	top: 0;
-	left: 0;
-	transition: all .5;
 }
 #content .side .pop ul li{
 	/*position: absolute;*/

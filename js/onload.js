@@ -4,6 +4,8 @@ window.onload = function(){
     // login();
     // informBar.init();
     // follow();
+    showVideo()
+    
 };
 
 
@@ -166,9 +168,8 @@ function getCourseList() {
     var url2 = 'http://study.163.com/webDev/hotcouresByCategory.htm';
 
     get(url1,data,renderCoursesList);
-    get(url1,data,renderCoursesListDetail);
-    get(url2,null,renderCoursesHot);
-    si2detail();
+    // get(url1,data,renderCoursesListDetail);
+    // get(url2,null,renderCoursesHot);
 }
 
 // 2.AJAX get 方法封装
@@ -209,41 +210,67 @@ function get(url,data,callback) {
 // 3.显示课程列表方法
 function renderCoursesList(data) {
     var cHTML = '';
-    if (data.list[0].price === 0) {
-        data.list[0].price = '免费';
-    }else{
-        data.list[0].price = '￥' + data.list[0].price;
+
+    for (var i = 0; i < 3; i++) {
+        if (data.list[i].price === 0) {
+            data.list[i].price = '免费';
+        }else{
+            data.list[i].price = '￥' + data.list[i].price;
+        }
+
+        // HTML代码拼接
+        cHTML += '<div class="courses"><div class="c-list"id="c-list"><div class="c-wrap"><div class="img"><img src="';
+        cHTML += data.list[i].middlePhotoUrl + '" alt="' ;
+        cHTML += data.list[i].name + '"></div><div class="c-info"><p class="title">';
+        cHTML += data.list[i].name + '</p><p class="author">';
+        cHTML += data.list[i].provider + '</p><p class="follow"><i class="person"></i><span>';
+        cHTML += data.list[i].learnerCount + '</span></p><p class="money">';
+        cHTML += data.list[i].price + '</p></div></div></div><div class="c-detail clearfix"id="c-detail"style="display: none;"><img class="img"src="';
+        cHTML += data.list[i].bigPhotoUrl + '"><div class="c-det clearfix"><p class="title">';
+        cHTML += data.list[i].name + '</p><div class="c-count"><i class="c-icon"></i>';
+        cHTML += data.list[i].learnerCount + '<p class="c-provider">';
+        cHTML += data.list[i].provider + '</p><p class="c-category">';
+        cHTML += data.list[i].categoryName  + '</p></div></div><div class="c-desc clearfix"><p>';
+        cHTML += data.list[i].description  + '</p></div></div></div>';
     }
 
-    cHTML += '<div class="img"><img  src="';
-    cHTML += data.list[0].middlePhotoUrl + '" alt="' ;
-    cHTML += data.list[0].name + '"></div><div class="c-info" ><p class="title">';
-    cHTML += data.list[0].name + '</p><p class="author">';
-    cHTML += data.list[0].provider + '</p><p class="follow"><i class="person"></i><span>';
-    cHTML += data.list[0].learnerCount + '</span></p><p class="money">';
-    cHTML += data.list[0].price + '</p></div></div><div class="c-detail clearfix" style="display: none"><img class="img" src="';
-    cHTML += data.list[0].bigPhotoUrl + '"><div class="c-det clearfix"><p class="title">';
-    cHTML += data.list[0].name + '</p><div class="c-count"><i class="c-icon"></i>';
-    cHTML += data.list[0].learnerCount + '<p class="c-provider">';
-    cHTML += data.list[0].provider + '</p><p class="c-category">';
-    cHTML += data.list[0].categoryName  + '</p></div></div><div class="c-desc clearfix"><p>';
-    cHTML += data.list[0].description  + '</p></div>';
+    $('list').innerHTML = cHTML;
 
-    $('c-list').innerHTML = cHTML;
+    // for (var i = 0; i < 3; i++) {
+    //     var simple = document.querySelectorAll('.c-list');
+    //     var detail = document.querySelectorAll('.c-detail');
+
+    //     simple[i].addEventListener('mouseover',function() {
+    //         simple[i].style.display = 'none';
+    //         detail[i].style.display = 'block';
+    //     },false) 
+    //     detail[i].addEventListener('mouseout',function() {
+    //         detail[i].style.display = 'none';
+    //         simple[i].style.display = 'block';
+    //     },false)
+
+    // }
 }
 
-// 4.鼠标悬浮显示课程详细信息方法
-function si2detail() {
-         $('c-list').addEventListener('mouseover',function() {
-                $('c-list').style.display = 'none';
-                $('c-detail').style.display = 'block';
-         },false)
-         $('c-detail').addEventListener('mouseout',function() {
-                $('c-list').style.display = 'block';
-                $('c-detail').style.display = 'none';
-         },false)
-         
-}; 
+function hoverC() {
+     // 4.鼠标悬浮显示课程详细信息方法
+    for (var i = 0; i < 3; i++) {
+        var simple = document.querySelectorAll('.c-list');
+        var detail = document.querySelectorAll('.c-detail');
+
+        simple[i].addEventListener('mouseover',function() {
+            simple[i].style.display = 'none';
+            detail[i].style.display = 'block';
+        },false) 
+        detail[i].addEventListener('mouseout',function() {
+            detail[i].style.display = 'none';
+            simple[i].style.display = 'block';
+        },false)
+
+    }
+
+}
+hoverC();
 
 // 5.显示课程列表详细内容方法
 function renderCoursesListDetail(data) {
@@ -265,7 +292,6 @@ function renderCoursesListDetail(data) {
     $('c-detail').innerHTML = cHTML;
 }
 
-
 // 6.显示右侧课程列表方法
 function renderCoursesHot(data){
     var popHTML = '';
@@ -281,15 +307,57 @@ function renderCoursesHot(data){
 
     $('pop-list').innerHTML = popHTML;
     $('pop-list').setInterval = popHTML;
-    courseRoll(data);
+    courseRoll();
 }
 
-function courseRoll(data) {
-    var items = $('pop-list').getElementsByTagName('li');
-    setInterval(function() {
-        // for (var i = 0; i < data.length; i++) {
-            items[0].style.display = 'none';
-        // }
-    },1000);
-    console.log(10);
+function courseRoll() {
+    var popWrap = $('pop-wrap');
+    var popList = $('pop-list');
+    var oTop = 0;
+    var rol;
+
+    var scroll = function () {
+        rol = setInterval(changeCourse,1000);
+    }
+    // scroll();///////
+    function changeCourse(){
+
+        // 判断是否移动至最后一个
+        if(oTop == -450){
+            oTop = 0;
+            popList.style.top = oTop  + 'px';
+        }
+        oTop += -73;
+        popList.style.top = oTop  + 'px';
+    }
+    function clearScroll(){
+        popList.onmouseover = function(){
+            clearInterval(rol);
+        }
+        popList.onmouseout = function(){
+            scroll();
+        }
+    }
+    clearScroll();
+}
+
+
+
+/** 1.7	右侧“机构介绍”中的视频介绍
+ * 1.主函数，显示及隐藏视频介绍
+ */
+
+function showVideo(){
+    var picHolder = document.querySelector('.v-info');
+    var videoArea = document.querySelector('.v-mask');
+    var videoClose = document.querySelector('.close');
+
+    // 点击视频介绍图片显示视频浮层
+    picHolder.onclick = function() {
+        videoArea.style.display = 'block';
+    }
+    // 点击右上角关闭按钮隐藏视频浮层
+    videoClose.onclick = function() {
+        videoArea.style.display = 'none';
+    }
 }
