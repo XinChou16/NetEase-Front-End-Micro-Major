@@ -1,6 +1,6 @@
 window.onload = function(){
   
-    getCourseList();
+    // getCourseList();
     // login();
     // informBar.init();
     // follow();
@@ -159,17 +159,25 @@ function loginDo(data){
 
 // 1.获取课程方法
 function getCourseList() {
-    var data = {
+    var data1 = {
         pageNo:1,
-        psize:20,
+        psize:10,
         type:10
-    };
+    }; 
     var url1 = 'http://study.163.com/webDev/couresByCategory.htm';
     var url2 = 'http://study.163.com/webDev/hotcouresByCategory.htm';
+    var productList = $('tabs').querySelectorAll('li')[0];
+    var programList = $('tabs').querySelectorAll('li')[1];
 
-    get(url1,data,renderCoursesList);
+    get(url1,data1,renderCoursesList);
+    productList.addEventListener('click',function() {
+        get(url1,data1,renderCoursesList);
+        programList.removeAttribute('class','active');
+        productList.setAttribute('class','active');
+    },false)
     // get(url1,data,renderCoursesListDetail);
     // get(url2,null,renderCoursesHot);
+    switchProgram();
 }
 
 // 2.AJAX get 方法封装
@@ -210,8 +218,9 @@ function get(url,data,callback) {
 // 3.显示课程列表方法
 function renderCoursesList(data) {
     var cHTML = '';
+    var pageSize = data.pagination.pageSize;
 
-    for (var i = 0; i < 3; i++) {
+    for (var i = 0; i < pageSize; i++) {
         if (data.list[i].price === 0) {
             data.list[i].price = '免费';
         }else{
@@ -235,7 +244,7 @@ function renderCoursesList(data) {
     }
 
     $('list').innerHTML = cHTML;
-
+    pageNumber(data);
     // for (var i = 0; i < 3; i++) {
     //     var simple = document.querySelectorAll('.c-list');
     //     var detail = document.querySelectorAll('.c-detail');
@@ -248,29 +257,28 @@ function renderCoursesList(data) {
     //         detail[i].style.display = 'none';
     //         simple[i].style.display = 'block';
     //     },false)
-
     // }
 }
 
-function hoverC() {
-     // 4.鼠标悬浮显示课程详细信息方法
-    for (var i = 0; i < 3; i++) {
-        var simple = document.querySelectorAll('.c-list');
-        var detail = document.querySelectorAll('.c-detail');
+// function hoverC() {
+//      // 4.鼠标悬浮显示课程详细信息方法
+//     for (var i = 0; i < 3; i++) {
+//         var simple = document.querySelectorAll('.c-list');
+//         var detail = document.querySelectorAll('.c-detail');
 
-        simple[i].addEventListener('mouseover',function() {
-            simple[i].style.display = 'none';
-            detail[i].style.display = 'block';
-        },false) 
-        detail[i].addEventListener('mouseout',function() {
-            detail[i].style.display = 'none';
-            simple[i].style.display = 'block';
-        },false)
+//         simple[i].addEventListener('mouseover',function() {
+//             simple[i].style.display = 'none';
+//             detail[i].style.display = 'block';
+//         },false) 
+//         detail[i].addEventListener('mouseout',function() {
+//             detail[i].style.display = 'none';
+//             simple[i].style.display = 'block';
+//         },false)
 
-    }
+//     }
 
-}
-hoverC();
+// }
+// hoverC();
 
 // 5.显示课程列表详细内容方法
 function renderCoursesListDetail(data) {
@@ -291,6 +299,50 @@ function renderCoursesListDetail(data) {
 
     $('c-detail').innerHTML = cHTML;
 }
+
+// 点击编程语言切换显示课程
+function switchProgram() {
+    var programList = $('tabs').querySelectorAll('li')[1];
+    var productList = $('tabs').querySelectorAll('li')[0];
+    var url1 = 'http://study.163.com/webDev/couresByCategory.htm';
+    var data2 = {
+        pageNo:1,
+        psize:20,
+        type:20
+    }; 
+    programList.addEventListener('click',function() {
+        get(url1,data2,renderCoursesList);
+        programList.setAttribute('class','active');
+        productList.removeAttribute('class','active');
+    },false)
+}
+
+// 动态创建翻页页码
+function pageNumber(data) {
+    var page = $('page');
+    var pageHTML = '<i class="before-page"></i>';
+    var pageNo = data.pagination.totlePageCount;
+
+    for(var i = 1; i < pageNo+1; i++){
+        pageHTML += '<a href="javascript:;"><span>'
+        pageHTML += i;
+        pageHTML += '</span></a>'
+    }
+    pageHTML += '<i class="next-page"></i>';
+    page.innerHTML = pageHTML;
+    pageSwitch();
+}
+
+// 点击页码切换课程
+function pageSwitch() {
+    var curPage = $('page').querySelectorAll('a')[0];
+    curPage.setAttribute('class','page-on');
+
+    curPage.addEventListener('click',function() {
+        // curPage.style.color = 'red';
+    },false)
+}
+
 
 // 6.显示右侧课程列表方法
 function renderCoursesHot(data){
