@@ -1,6 +1,6 @@
 window.onload = function(){
   
-    // getCourseList();
+    getCourseList();
     // login();
     // informBar.init();
     // follow();
@@ -159,11 +159,9 @@ function loginDo(data){
 
 // 1.获取课程方法
 function getCourseList() {
-    var data1 = {
-        pageNo:1,
-        psize:10,
-        type:10
-    }; 
+    // 产品设计请求数据
+    var data1 = reqData(1,10,10);
+    var data2 = reqData(2,10,10);
     var url1 = 'http://study.163.com/webDev/couresByCategory.htm';
     var url2 = 'http://study.163.com/webDev/hotcouresByCategory.htm';
     var productList = $('tabs').querySelectorAll('li')[0];
@@ -215,12 +213,24 @@ function get(url,data,callback) {
   xhr.send(null);
 }
 
+// 请求数据函数封装
+function reqData(pageNo,psize,type) {
+    return {
+        pageNo: pageNo,
+        psize: psize,
+        type: type
+    }
+}
+
 // 3.显示课程列表方法
 function renderCoursesList(data) {
     var cHTML = '';
+    // 每页的数据个数
     var pageSize = data.pagination.pageSize;
-
-    for (var i = 0; i < pageSize; i++) {
+    // 当前页码
+    var pageIndex = data.pagination.pageIndex;
+    
+    for (var i = pageSize*(pageIndex-1); i < pageSize*pageIndex; i++) {
         if (data.list[i].price === 0) {
             data.list[i].price = '免费';
         }else{
@@ -245,40 +255,29 @@ function renderCoursesList(data) {
 
     $('list').innerHTML = cHTML;
     pageNumber(data);
-    // for (var i = 0; i < 3; i++) {
-    //     var simple = document.querySelectorAll('.c-list');
-    //     var detail = document.querySelectorAll('.c-detail');
-
-    //     simple[i].addEventListener('mouseover',function() {
-    //         simple[i].style.display = 'none';
-    //         detail[i].style.display = 'block';
-    //     },false) 
-    //     detail[i].addEventListener('mouseout',function() {
-    //         detail[i].style.display = 'none';
-    //         simple[i].style.display = 'block';
-    //     },false)
-    // }
+    
+    
+    hoverC();
 }
 
-// function hoverC() {
-//      // 4.鼠标悬浮显示课程详细信息方法
-//     for (var i = 0; i < 3; i++) {
-//         var simple = document.querySelectorAll('.c-list');
-//         var detail = document.querySelectorAll('.c-detail');
+function hoverC() {
+     // 4.鼠标悬浮显示课程详细信息方法
+    // for (var i = 0; i < 3; i++) {
+        var simple = document.querySelectorAll('.c-list');
+        var detail = document.querySelectorAll('.c-detail');
 
-//         simple[i].addEventListener('mouseover',function() {
-//             simple[i].style.display = 'none';
-//             detail[i].style.display = 'block';
-//         },false) 
-//         detail[i].addEventListener('mouseout',function() {
-//             detail[i].style.display = 'none';
-//             simple[i].style.display = 'block';
-//         },false)
+        simple[0].addEventListener('mouseover',function() {
+            simple[0].style.display = 'none';
+            detail[0].style.display = 'block';
+        },false) 
+        detail[0].addEventListener('mouseout',function() {
+            detail[0].style.display = 'none';
+            simple[0].style.display = 'block';
+        },false)
 
-//     }
+    // }
 
-// }
-// hoverC();
+}
 
 // 5.显示课程列表详细内容方法
 function renderCoursesListDetail(data) {
@@ -330,17 +329,22 @@ function pageNumber(data) {
     }
     pageHTML += '<i class="next-page"></i>';
     page.innerHTML = pageHTML;
-    pageSwitch();
+
+    pageSwitch(pageNo);
+    
+    // 设置当前页码的颜色
+    $('page').querySelectorAll('span')[0].style.color = 'red'
 }
 
 // 点击页码切换课程
-function pageSwitch() {
-    var curPage = $('page').querySelectorAll('a')[0];
-    curPage.setAttribute('class','page-on');
+function pageSwitch(pageNo) {
+    var page = $('page')
+    var curPageTxt = $('page').querySelectorAll('span');
 
-    curPage.addEventListener('click',function() {
-        // curPage.style.color = 'red';
-    },false)
+        page.addEventListener('click',function(e) {
+            e.target.style.color = 'red'
+        },false)
+   
 }
 
 
