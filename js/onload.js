@@ -159,7 +159,7 @@ function loginDo(data){
 
 // 1.获取课程方法
 function getCourseList() {
-    // 产品设计请求数据
+    // 产品设计请求数据 
     var data1 = reqData(1,10,10);
     var data2 = reqData(2,10,10);
     var url1 = 'http://study.163.com/webDev/couresByCategory.htm';
@@ -417,3 +417,9 @@ function showVideo(){
         videoArea.style.display = 'none';
     }
 }
+
+/** 1.7	轮播
+ * 1.主函数，显示及隐藏视频介绍
+ */
+
+function shoe(){}
