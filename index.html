@@ -59,18 +59,28 @@
 	</div>
 
 	<!-- 轮播图 -->
-	<div id="banner" class="banner">
-		<ul class="img" id="img">
-			<li class="on"><a href="http://open.163.com/" target="_blank"><img src="./images/banner1.jpg" alt="1"></a></li>
-			<li><a href="http://study.163.com/" target="_blank"><img src="./images/banner2.jpg" alt="2"></a></li>
-			<li><a href="http://icourse163.org" target="_blank"><img src="./images/banner3.jpg" alt="3"></a></li>
-		</ul>
-		<ul class="order" id="order">
-		    <!-- <li class="on">1</li>
-		    <li>2</li>
-		    <li>3</li>
-		    <li>4</li> -->
-		</ul>
+	<div id="banner" class="banner" >
+       <div class="s-slide" style="transform: translateX(0%);" >
+           <div class="slide active" style="left:0;">
+               <a href="http://open.163.com/" target="_blank"><img src="./images/banner1.jpg" alt="1"></a>
+            </div>
+           <div class="slide active" style="left:100%;">
+               <a href="http://study.163.com/" target="_blank"><img src="./images/banner2.jpg" alt="2"></a>
+            </div>
+           <div class="slide" style="left:200%;">
+               <a href="http://icourse163.org" target="_blank"><img src="./images/banner3.jpg" alt="3"></a>
+            </div>
+         
+           <div class="slide" style="left:300%;">
+              <a href="http://open.163.com/" target="_blank"><img src="./images/banner1.jpg" alt="1"></a>
+            </div>
+         
+       </div>
+       <ul class="switch">
+           <li class="cursor active">1</li>
+           <li class="cursor">2</li>
+           <li class="cursor">3</li>
+       </ul>
 	</div>
 
 	<!-- 介绍 -->
@@ -100,16 +110,16 @@
 			</div>
 		</div>
 	</div>
-
+ 
 	<!-- 展示 -->
-	<div id="show" class="show">
+	<div id="daily" class="daily">
 		<img src="./images/show-1.png" alt="show-1">
 		<img src="./images/show-2.png" alt="show-2">
 		<img src="./images/show-3.png" alt="show-3">
 		<img src="./images/show-4.png" alt="show-4">
 		<img class="no-mar" src="./images/show-5.png" alt="show-5">
 	</div>
-
+	
 
 	<!-- 内容区 -->
 	<div id="content" class="clearfix">

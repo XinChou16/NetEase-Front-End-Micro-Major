@@ -1,16 +1,82 @@
 window.onload = function(){
   
-    getCourseList();
+    // getCourseList();
     // login();
     // informBar.init();
     // follow();
-    showVideo()
+    // showVideo()
+    // slideNext();
+var carousel = (function (){
+   
+    var timer;
+    // 每次左移一个图片的距离
+    function slideNext() {
+        var slides = $('.slide');
+        var wrap = $('.s-slide')[0];
+        var imgIndex =1;
+        
+        timer = setInterval(function(){
+            
+            if(imgIndex >= slides.length){
+            imgIndex = 1;
+        }
+            
+            wrap.style.transform = 'translateX(' + imgIndex*(-100) + '%)';
+            imgIndex++;
+            showDot();
+            console.log('1')
+        },2000);
+        
+        stop(timer);
+        show();
+        run();
+    }
+
     
+
+    var index = 0;
+    function showDot(){
+        var dot = $('.cursor');
+    
+        index++;//放在最后面，后出现bug
+        if(index > 2) index=0;
+        for(var i =0;i<3;i++){
+            if( dot[i].className == 'cursor active'){
+                 dot[i].className='cursor';
+            }
+        }
+        dot[index].className+=' active';
+    
+    }
+
+    function stop(timer){
+        $('.banner')[0].onmouseover = function(){
+            clearInterval(timer);
+        };
+    }
+    function run(){
+        $('.banner')[0].onmouseout = function(){
+            slideNext();
+        };
+    }
+
+    function show(){
+        var dots = $('.cursor');
+        var wrap = $('.s-slide')[0];
+        dots.forEach(function(item,index){
+            item.onclick = function(){
+            wrap.style.transform = 'translateX(' + (index)*(-100) + '%)';
+            showDot();
+            }
+        });
+    } 
+    slideNext();
+} )();
 };
 
 
-function $(id){
-    return document.getElementById(id);
+function $(selector){
+  return [].slice.call(document.querySelectorAll(selector));
 }
 
 
@@ -422,4 +488,68 @@ function showVideo(){
  * 1.主函数，显示及隐藏视频介绍
  */
 
-function shoe(){}
+var carousel = (function (){
+   
+    var timer;
+    // 每次左移一个图片的距离
+    function slideNext() {
+        var slides = $('.slide');
+        var wrap = $('.s-slide')[0];
+        var imgIndex =1;
+        
+        timer = setInterval(function(){
+            
+            if(imgIndex >= slides.length){
+            imgIndex = 1;
+        }
+            
+            wrap.style.transform = 'translateX(' + imgIndex*(-100) + '%)';
+            imgIndex++;
+            showDot();
+            console.log('1')
+        },2000);
+        
+        stop(timer);
+        show();
+        run();
+    }
+
+    
+
+    var index = 0;
+    function showDot(){
+        var dot = $('.cursor');
+    
+        index++;//放在最后面，后出现bug
+        if(index > 2) index=0;
+        for(var i =0;i<3;i++){
+            if( dot[i].className == 'cursor active'){
+                 dot[i].className='cursor';
+            }
+        }
+        dot[index].className+=' active';
+    
+    }
+
+    function stop(timer){
+        $('.banner')[0].onmouseover = function(){
+            clearInterval(timer);
+        };
+    }
+    function run(){
+        $('.banner')[0].onmouseout = function(){
+            slideNext();
+        };
+    }
+
+    function show(){
+        var dots = $('.cursor');
+        var wrap = $('.s-slide')[0];
+        dots.forEach(function(item,index){
+            item.onclick = function(){
+            wrap.style.transform = 'translateX(' + (index)*(-100) + '%)';
+            showDot();
+            }
+        });
+    } 
+} )();

@@ -258,42 +258,56 @@ li{
 
 
 /* 轮播图 */
+
 #banner{
+  position: relative;
 	width: 1612px;
 	height: 460px;
-	margin: 0 auto;
 	margin-top: 37px;
-	position: relative;
-}
-#banner .img>li{
-	position: absolute;
-    transition: all 1s ease;
-    opacity:0;
-}
-#banner .order{
-	position: absolute;
-	width: 100%;
-	top: 430px;
-	left: 100px;
-	text-align: center;
-}
-#banner .order li {
-    display: inline-block;
-    width: 10px;
-    height: 10px;
-    background: white;
-    border-radius: 50%;
-    margin: 0 5px;
-    cursor: pointer;
-}
-#banner .img .on {
-    display: block;
-    opacity: 1;
-}
-#banner .order .on {
-    background: #f00;
+  overflow: hidden;
+  margin: 0 auto;
 }
 
+#banner img:nth-of-type(2){
+  border: 1px solid #0ff;
+}
+#banner .s-slide{
+  position: relative;
+}
+#banner .s-slide .slide{
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transition: 0.5s ease-in-out;
+}
+
+#banner .switch .active{
+  color: #3cf;
+  background-color: #fff;
+
+}
+#banner .switch{
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  cursor: pointer;
+}
+#banner .switch li{
+  float: left;
+  width: 20px;
+  height: 20px;
+  margin-right: 8px;
+  line-height: 20px;
+  text-align: center;
+  border-radius: 50%;
+  color: #fff;
+  background-color: #ddd;
+}
+#banner .switch li:hover{
+  color: #ccc;
+  background-color: #fff;
+}
 
 /* 介绍 */
 #intro{
@@ -413,19 +427,19 @@ li{
 
 
 /* 展示 */
-#show{
+#daily{
 	width: 1612px;
 	height: 220px;
 	margin: 0 auto;
 	margin-top: 61px;
 	overflow: hidden;
 }
-#show img{
+#daily img{ 
 	float: left;
 	/*margin-right:4px;*/
 }
 /* 去掉最后一张图片的右边距 */
-#show .no-mar{
+#daily .no-mar{
 	margin-right: -4px;
 }
 
