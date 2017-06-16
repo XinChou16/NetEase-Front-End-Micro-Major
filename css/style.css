@@ -804,7 +804,7 @@ li{
 	width: 223px;	
 	height: 720px;
 	position: absolute;
-	top: 0px;
+	/*top: 0px;*/
 	-webkit-transition: .5s;
 	-o-transition: .5s;
 	transition: .5s;
@@ -855,7 +855,7 @@ li{
 	margin-bottom: -1px;
 }
 #content .side .pop .follow{
-	margin-top: 10px;
+	margin-top: 6px;
 }
 #content .side .pop .follow span{
 	display: inline-block;

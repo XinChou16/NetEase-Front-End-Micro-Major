@@ -1,83 +1,27 @@
 window.onload = function(){
-  
-    // getCourseList();
-    // login();
-    // informBar.init();
-    // follow();
-    // showVideo()
-    // slideNext();
-var carousel = (function (){
-   
-    var timer;
-    // 每次左移一个图片的距离
-    function slideNext() {
-        var slides = $('.slide');
-        var wrap = $('.s-slide')[0];
-        var imgIndex =1;
-        
-        timer = setInterval(function(){
-            
-            if(imgIndex >= slides.length){
-            imgIndex = 1;
-        }
-            
-            wrap.style.transform = 'translateX(' + imgIndex*(-100) + '%)';
-            imgIndex++;
-            showDot();
-            console.log('1')
-        },2000);
-        
-        stop(timer);
-        show();
-        run();
-    }
-
     
+    // 1.1 关闭顶部通知条
+    informBar.init();
 
-    var index = 0;
-    function showDot(){
-        var dot = $('.cursor');
+    // 1.2	关注“网易教育产品部”登录
+    follow();
+
+    // 1.5	左侧内容区tab切换
+    // 1.6	查看课程详情
+    // 1.8	右侧“热门推荐”
+    getCourseList();
     
-        index++;//放在最后面，后出现bug
-        if(index > 2) index=0;
-        for(var i =0;i<3;i++){
-            if( dot[i].className == 'cursor active'){
-                 dot[i].className='cursor';
-            }
-        }
-        dot[index].className+=' active';
-    
-    }
-
-    function stop(timer){
-        $('.banner')[0].onmouseover = function(){
-            clearInterval(timer);
-        };
-    }
-    function run(){
-        $('.banner')[0].onmouseout = function(){
-            slideNext();
-        };
-    }
-
-    function show(){
-        var dots = $('.cursor');
-        var wrap = $('.s-slide')[0];
-        dots.forEach(function(item,index){
-            item.onclick = function(){
-            wrap.style.transform = 'translateX(' + (index)*(-100) + '%)';
-            showDot();
-            }
-        });
-    } 
-    slideNext();
-} )();
 };
 
 
-function $(selector){
+function $(id){
+  return document.getElementById(id);
+}
+
+function $$(selector){
   return [].slice.call(document.querySelectorAll(selector));
 }
+
 
 
 /**1.1 关闭顶部通知条
@@ -139,7 +83,6 @@ var informBar = {
     closeInformBar: function() {
         $('shutDown').onclick = function(){
             cookie.set('isShutDown',true,10);
-            // console.log(document.cookie);
             $('inform').style.display = 'none';
         }
     },
@@ -155,7 +98,7 @@ var informBar = {
 
 
 
-/**1.2	关注“网易教育产品部”/登录
+/**1.2	关注“网易教育产品部”登录
  * 1: 主函数，判断是否设置cookie
  * 2: 登录请求判断方法
  * 3: 登录返回数据参数方法
@@ -166,12 +109,17 @@ function follow() {
     var btns = $('before-follow').getElementsByTagName('button');
     var inputs = $('login').getElementsByTagName('input');
     var followCookie = cookie.get('loginSuc');
+    var shutDown = $$('.content .shutdown')[0];
     // console.log('followCookie = '+ followCookie);
     // 模拟失败情形
     // var followCookie = false;
     if(followCookie) {
         $('before-follow').style.display = 'none';
         $('after-follow').style.display = 'block';
+    }
+
+    shutDown.onclick = function(){
+        $('login').style.display = 'none';
     }
     // btns绑定事件
     btns[0].onclick = function () {
@@ -189,11 +137,11 @@ function follow() {
 function login(){
     // 登录的数据为输入框的value值
     var inputs = $('login').getElementsByTagName('input');
+    var url = 'http://study.163.com/webDev/login.htm';
     var loginData = {
         userName: inputs[0].value,
         password: inputs[1].value
     };
-    var url = 'http://study.163.com/webDev/login.htm';
 
     get(url,loginData,loginDo);
 }
@@ -212,15 +160,83 @@ function loginDo(data){
 
 
 
+/** 
+ * 1.4 轮播模块
+ */
 
-/** 获取课程数据函数模块
+var carousel = (function (){
+   
+    var timer;
+    // 每次左移一个图片的距离
+    function slideNext() {
+        var slides = $$('.slide');
+        var wrap = $$('.s-slide')[0];
+        var imgIndex =1;
+        
+        timer = setInterval(function(){
+            
+            if(imgIndex >= slides.length){
+            imgIndex = 1;
+        }
+            
+            wrap.style.transform = 'translateX(' + imgIndex*(-100) + '%)';
+            imgIndex++;
+            
+            showDot();
+        },2000);
+        
+        stop(timer);
+        show();
+        run();
+    }
+
+    var index = 0;
+    function showDot(){
+        var dot = $$('.cursor');
+    
+        index++;//放在最后面，后出现bug
+        if(index > 2) index=0;
+        for(var i =0;i<3;i++){
+            if( dot[i].className == 'cursor active'){
+                 dot[i].className='cursor';
+            }
+        }
+
+        dot[index].className+=' active';
+    }
+
+    function stop(timer){
+        $$('.banner')[0].onmouseover = function(){
+            clearInterval(timer);
+        };
+    }
+    function run(){
+        $$('.banner')[0].onmouseout = function(){
+            slideNext();
+        };
+    }
+
+    function show(){
+        var dots = $$('.cursor');
+        var wrap = $$('.s-slide')[0];
+        dots.forEach(function(item,index){
+            item.onclick = function(){
+            wrap.style.transform = 'translateX(' + (index)*(-100) + '%)';
+            showDot();
+            }
+        });
+    } 
+
+    slideNext();
+
+})();
+
+
+/** 1.5	左侧内容区tab切换
+ *  1.6	查看课程详情
+ *  1.8	右侧“热门推荐”
+ * 获取课程数据函数模块
  * 1.
- * 2. 
- * 3.
- * 4.
- * 5.
- * 6.
- * 7.
  */
 
 // 1.获取课程方法
@@ -234,13 +250,14 @@ function getCourseList() {
     var programList = $('tabs').querySelectorAll('li')[1];
 
     get(url1,data1,renderCoursesList);
+    
     productList.addEventListener('click',function() {
         get(url1,data1,renderCoursesList);
         programList.removeAttribute('class','active');
         productList.setAttribute('class','active');
     },false)
     // get(url1,data,renderCoursesListDetail);
-    // get(url2,null,renderCoursesHot);
+    get(url2,null,renderCoursesHot);
     switchProgram();
 }
 
@@ -320,17 +337,17 @@ function renderCoursesList(data) {
     }
 
     $('list').innerHTML = cHTML;
+    
     pageNumber(data);
-    
-    
     hoverC();
 }
 
+// 4.鼠标悬浮显示课程详细信息方法 - 功能未实现，，，
 function hoverC() {
-     // 4.鼠标悬浮显示课程详细信息方法
+     
     // for (var i = 0; i < 3; i++) {
-        var simple = document.querySelectorAll('.c-list');
-        var detail = document.querySelectorAll('.c-detail');
+        var simple = $$('.c-list');
+        var detail = $$('.c-detail');
 
         simple[0].addEventListener('mouseover',function() {
             simple[0].style.display = 'none';
@@ -365,10 +382,10 @@ function renderCoursesListDetail(data) {
     $('c-detail').innerHTML = cHTML;
 }
 
-// 点击编程语言切换显示课程
+// 6.点击编程语言切换显示课程
 function switchProgram() {
-    var programList = $('tabs').querySelectorAll('li')[1];
-    var productList = $('tabs').querySelectorAll('li')[0];
+    var programList = $('tabs').$$('li')[1];
+    var productList = $('tabs').$$('li')[0];
     var url1 = 'http://study.163.com/webDev/couresByCategory.htm';
     var data2 = {
         pageNo:1,
@@ -382,7 +399,7 @@ function switchProgram() {
     },false)
 }
 
-// 动态创建翻页页码
+// 7.动态创建翻页页码
 function pageNumber(data) {
     var page = $('page');
     var pageHTML = '<i class="before-page"></i>';
@@ -399,13 +416,13 @@ function pageNumber(data) {
     pageSwitch(pageNo);
     
     // 设置当前页码的颜色
-    $('page').querySelectorAll('span')[0].style.color = 'red'
+    $('page').$$('span')[0].style.color = 'red'
 }
 
-// 点击页码切换课程
+// 8.点击页码切换课程
 function pageSwitch(pageNo) {
     var page = $('page')
-    var curPageTxt = $('page').querySelectorAll('span');
+    var curPageTxt = $('page').$$('span');
 
         page.addEventListener('click',function(e) {
             e.target.style.color = 'red'
@@ -413,8 +430,7 @@ function pageSwitch(pageNo) {
    
 }
 
-
-// 6.显示右侧课程列表方法
+// 9.显示右侧课程列表方法
 function renderCoursesHot(data){
     var popHTML = '';
 
@@ -432,35 +448,41 @@ function renderCoursesHot(data){
     courseRoll();
 }
 
+// 10.右侧热门课程滚动显示
 function courseRoll() {
     var popWrap = $('pop-wrap');
     var popList = $('pop-list');
     var oTop = 0;
-    var rol;
+    var roll;
 
-    var scroll = function () {
-        rol = setInterval(changeCourse,1000);
-    }
-    // scroll();///////
+    function scroll() {
+        roll = setInterval(changeCourse,1000);
+    };
+    scroll();
+
     function changeCourse(){
 
         // 判断是否移动至最后一个
-        if(oTop == -450){
+        if(oTop < -560){
             oTop = 0;
             popList.style.top = oTop  + 'px';
+        }else{
+            // 不是最后一个就滚动
+            oTop += -70;
+            popList.style.top = oTop  + 'px';
         }
-        oTop += -73;
-        popList.style.top = oTop  + 'px';
     }
+
     function clearScroll(){
         popList.onmouseover = function(){
-            clearInterval(rol);
+            clearInterval(roll);
         }
         popList.onmouseout = function(){
             scroll();
         }
-    }
+    };
     clearScroll();
+
 }
 
 
@@ -469,10 +491,10 @@ function courseRoll() {
  * 1.主函数，显示及隐藏视频介绍
  */
 
-function showVideo(){
-    var picHolder = document.querySelector('.v-info');
-    var videoArea = document.querySelector('.v-mask');
-    var videoClose = document.querySelector('.close');
+var showVideo = (function (){
+    var picHolder = $$('.v-info')[0];
+    var videoArea = $$('.v-mask')[0];
+    var videoClose = $$('.close')[0];
 
     // 点击视频介绍图片显示视频浮层
     picHolder.onclick = function() {
@@ -482,74 +504,5 @@ function showVideo(){
     videoClose.onclick = function() {
         videoArea.style.display = 'none';
     }
-}
+})();
 
-/** 1.7	轮播
- * 1.主函数，显示及隐藏视频介绍
- */
-
-var carousel = (function (){
-   
-    var timer;
-    // 每次左移一个图片的距离
-    function slideNext() {
-        var slides = $('.slide');
-        var wrap = $('.s-slide')[0];
-        var imgIndex =1;
-        
-        timer = setInterval(function(){
-            
-            if(imgIndex >= slides.length){
-            imgIndex = 1;
-        }
-            
-            wrap.style.transform = 'translateX(' + imgIndex*(-100) + '%)';
-            imgIndex++;
-            showDot();
-            console.log('1')
-        },2000);
-        
-        stop(timer);
-        show();
-        run();
-    }
-
-    
-
-    var index = 0;
-    function showDot(){
-        var dot = $('.cursor');
-    
-        index++;//放在最后面，后出现bug
-        if(index > 2) index=0;
-        for(var i =0;i<3;i++){
-            if( dot[i].className == 'cursor active'){
-                 dot[i].className='cursor';
-            }
-        }
-        dot[index].className+=' active';
-    
-    }
-
-    function stop(timer){
-        $('.banner')[0].onmouseover = function(){
-            clearInterval(timer);
-        };
-    }
-    function run(){
-        $('.banner')[0].onmouseout = function(){
-            slideNext();
-        };
-    }
-
-    function show(){
-        var dots = $('.cursor');
-        var wrap = $('.s-slide')[0];
-        dots.forEach(function(item,index){
-            item.onclick = function(){
-            wrap.style.transform = 'translateX(' + (index)*(-100) + '%)';
-            showDot();
-            }
-        });
-    } 
-} )();
