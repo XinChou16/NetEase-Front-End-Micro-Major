@@ -384,8 +384,8 @@ function renderCoursesListDetail(data) {
 
 // 6.点击编程语言切换显示课程
 function switchProgram() {
-    var programList = $('tabs').$$('li')[1];
-    var productList = $('tabs').$$('li')[0];
+    var programList = $('tabs').querySelectorAll('li')[1];
+    var productList = $('tabs').querySelectorAll('li')[0];
     var url1 = 'http://study.163.com/webDev/couresByCategory.htm';
     var data2 = {
         pageNo:1,
@@ -416,16 +416,16 @@ function pageNumber(data) {
     pageSwitch(pageNo);
     
     // 设置当前页码的颜色
-    $('page').$$('span')[0].style.color = 'red'
+    $('page').querySelectorAll('span')[0].style.color = '#39a030'
 }
 
 // 8.点击页码切换课程
 function pageSwitch(pageNo) {
     var page = $('page')
-    var curPageTxt = $('page').$$('span');
+    var curPageTxt = $('page').querySelectorAll('span');
 
         page.addEventListener('click',function(e) {
-            e.target.style.color = 'red'
+            e.target.style.color = '#39a030'
         },false)
    
 }

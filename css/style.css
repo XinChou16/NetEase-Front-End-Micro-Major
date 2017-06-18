@@ -146,7 +146,6 @@ li{
 .naviator .navbar{
 	position: relative;
 	display: inline-block;
-	border: 1px solid magenta;
 	width: 100%;
 	height: 30px;
 }
@@ -282,8 +281,7 @@ li{
 }
 
 #banner .switch .active{
-  color: #3cf;
-  background-color: #fff;
+  background-color: #333;
 
 }
 #banner .switch{
@@ -295,14 +293,13 @@ li{
 }
 #banner .switch li{
   float: left;
-  width: 20px;
-  height: 20px;
+  width: 10px;
+  height: 10px;
   margin-right: 8px;
-  line-height: 20px;
+  line-height: 10px;
   text-align: center;
   border-radius: 50%;
-  color: #fff;
-  background-color: #ddd;
+  background-color: #fff;
 }
 #banner .switch li:hover{
   color: #ccc;
@@ -315,7 +312,6 @@ li{
 	height: 178px;
 	margin: 0 auto;
 	margin-top: 62px;
-	border: 1px solid blue;
 }
 #intro .eatease{
 	float: left;
@@ -436,7 +432,7 @@ li{
 }
 #daily img{ 
 	float: left;
-	/*margin-right:4px;*/
+	margin-right:4px;
 }
 /* 去掉最后一张图片的右边距 */
 #daily .no-mar{
@@ -572,6 +568,7 @@ li{
 #content .cont-left .cont .follow span{
 	display: inline-block;
 	margin-top: 2px ;
+	padding-right: 3px;
 }
 #content .cont-left .cont li{
 	width: 223px;
@@ -701,9 +698,8 @@ li{
 	background-color: #f8f8f8;
 }
 #content .side .video{
-	width:226px
-	height:175px;
-	padding: : 0 auto;
+	width:226px;
+	padding: 0 auto;
 	background: #fff;
 	border: 1px solid #ddd;
 }
@@ -716,8 +712,8 @@ li{
 	border-bottom: 1px solid #ddd;
 }
 #content .side .video .v-info{
-	height: 173px;
-	margin-left: 22px;
+	text-align: center;
+	padding-bottom: 20px;
 	position: relative;
 }
 #content .side .video .v-info img{
@@ -896,17 +892,16 @@ li{
 }
 #footer .copyright{
 	margin-top: 90px;
-	/*margin-left: 256px;*/
 	width: 545px;
 }
 #footer .copyright .edu{
 	display: inline-block;
-	background: url(../images/edu.png) no-repeat ;
+	background: url(../images/edu.png) no-repeat 0 0;
 	vertical-align: text-bottom;
-	width: 71px;
-	height: 21px;
+	width: 94px;
+	height: 40px;
 	padding-right: 14px;
-	margin-bottom: -3px;
+	margin-bottom: -12px;
 }
 #footer .copyright .net{
 	display: inline-block;
