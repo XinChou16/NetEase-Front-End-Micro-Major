@@ -152,7 +152,9 @@ function loginDo(data){
     // 拿到的数据为1，表示匹配成功，匹配成功才设置cookie！
    if (data == 0) { //这里判断后面要改，因为，无法获取返回的数据为1！！
         $('login').style.display = 'none';
+
         cookie.set('loginSuc',true,5);
+
         $('before-follow').style.display = 'none';
         $('after-follow').style.display = 'block';
    }
@@ -176,14 +178,14 @@ var carousel = (function (){
         timer = setInterval(function(){
             
             if(imgIndex >= slides.length){
-            imgIndex = 1;
-        }
+                 imgIndex = 1;
+            }
             
             wrap.style.transform = 'translateX(' + imgIndex*(-100) + '%)';
             imgIndex++;
             
-            showDot();
-        },2000);
+                showDot();
+            },2000);
         
         stop(timer);
         show();
@@ -256,7 +258,7 @@ function getCourseList() {
         programList.removeAttribute('class','active');
         productList.setAttribute('class','active');
     },false)
-    // get(url1,data,renderCoursesListDetail);
+    
     get(url2,null,renderCoursesHot);
     switchProgram();
 }
@@ -384,6 +386,7 @@ function renderCoursesListDetail(data) {
 
 // 6.点击编程语言切换显示课程
 function switchProgram() {
+    // 获取切换的li
     var programList = $('tabs').querySelectorAll('li')[1];
     var productList = $('tabs').querySelectorAll('li')[0];
     var url1 = 'http://study.163.com/webDev/couresByCategory.htm';
@@ -392,11 +395,13 @@ function switchProgram() {
         psize:20,
         type:20
     }; 
+
     programList.addEventListener('click',function() {
         get(url1,data2,renderCoursesList);
         programList.setAttribute('class','active');
         productList.removeAttribute('class','active');
     },false)
+
 }
 
 // 7.动态创建翻页页码
@@ -424,9 +429,9 @@ function pageSwitch(pageNo) {
     var page = $('page')
     var curPageTxt = $('page').querySelectorAll('span');
 
-        page.addEventListener('click',function(e) {
-            e.target.style.color = '#39a030'
-        },false)
+    page.addEventListener('click',function(e) {
+        e.target.style.color = '#39a030'
+    },false)
    
 }
 
