@@ -767,12 +767,12 @@ li{
 #content .side .video .v-mask .v-video .control{
 	width: 890px;
 	height: 566px;
-	margin-left: 30px;
+	margin: 0 20px;
 	position: relative;
 }
 #content .side .video .v-mask .v-video .control video{
 	/*width: 888px;*/
-	object-fit: contain;
+	/*object-fit: contain;*/
 }
 #content .side .video .v-mask .v-video .control .pause{
 	display: inline-block;
